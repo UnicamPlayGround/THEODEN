@@ -11,6 +11,9 @@ namespace Models.ModelConfigurations
         public MinMax width;
         public MinMax height;
         public MinMax depth;
+        public MinMax scaleX;
+        public MinMax scaleY;
+        public MinMax scaleZ;
         public SpeedModifier speedModifier;
     }
 }

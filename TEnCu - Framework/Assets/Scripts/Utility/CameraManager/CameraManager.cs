@@ -13,24 +13,26 @@ namespace Utility.CameraManager
         protected const float ThresholdSwipe = 10F;
         protected const float MaximumDifferenceBetweenFingersDuringSlide = 10F;
         private float _fieldOfView;
+        private float _modelScale;
         protected float startingZEulerAngle;
 
         private void Start()
         {
             cam = Camera.allCameras[0];
             _fieldOfView = cam.fieldOfView;
+            _modelScale = 1F;
             startingZEulerAngle = cam.transform.rotation.eulerAngles.z;
         }
 
         private void Update()
         {
-            if (!trigger.activeSelf) return;
+            if (trigger != null && !trigger.activeSelf) return;
             ManageInput();
         }
 
         protected virtual void ManageInput() { }
 
-        protected void Zoom(float deltaZoom)
+        protected void ZoomCamera(float deltaZoom)
         {
             if (deltaZoom > 0)
                 _fieldOfView -= 1;
@@ -40,6 +42,20 @@ namespace Utility.CameraManager
             cam.fieldOfView = _fieldOfView;
         }
 
+        protected void ZoomModel(float deltaZoom)
+        {
+            if (deltaZoom > 0)
+                _modelScale += 0.01F;
+            else if (deltaZoom < 0) _modelScale -= 0.01F;
+            
+            var scaledModel = model.transform.localScale;
+            scaledModel *= _modelScale;
+            scaledModel.x = Mathf.Clamp(scaledModel.x, modelConfigs.prefab.scaleX.min, modelConfigs.prefab.scaleX.max);
+            scaledModel.y = Mathf.Clamp(scaledModel.y, modelConfigs.prefab.scaleY.min, modelConfigs.prefab.scaleY.max);
+            scaledModel.z = Mathf.Clamp(scaledModel.z, modelConfigs.prefab.scaleZ.min, modelConfigs.prefab.scaleZ.max);
+            model.transform.localScale = scaledModel;
+        }
+        
         protected void TranslateModel(Vector3 deltas)
         {
             model.transform.Translate(deltas * modelConfigs.prefab.speedModifier.translation);

@@ -23,7 +23,7 @@ namespace Utility.CameraManager._2D
                     var previousPositionsMagnitude = (touchZeroPreviousPosition - touchOnePreviousPosition).magnitude;
                     var currentPositionsMagnitude = (touchZeroCurrentPosition - touchOneCurrentPosition).magnitude;
                     var magnitudeDifference = currentPositionsMagnitude - previousPositionsMagnitude;
-                    Zoom(magnitudeDifference);
+                    ZoomCamera(magnitudeDifference);
                     break;
             }
         }
