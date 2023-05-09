@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class TencuFrameworkServerConfig(AppConfig):
+class THEODENFrameworkServerConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'Tencu_Framework_Server'
+    name = 'THEODEN_Framework_Server'

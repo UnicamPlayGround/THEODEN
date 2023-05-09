@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from Tencu_Framework_Server.models.Version import Version
+from THEODEN_Framework_Server.models.Version import Version
 
 
 class VersionSerializer(serializers.ModelSerializer):

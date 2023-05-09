@@ -1,5 +1,5 @@
 """
-WSGI config for TEnCu_Framework_Server project.
+WSGI config for THEODEN_Framework_Server project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TEnCu_Framework_Server.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'THEODEN_Framework_Server.settings')
 
 application = get_wsgi_application()

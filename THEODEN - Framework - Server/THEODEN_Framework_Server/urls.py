@@ -1,4 +1,4 @@
-"""TEnCu_Framework_Server URL Configuration
+"""THEODEN_Framework_Server URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
@@ -16,7 +16,7 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path
 
-from Tencu_Framework_Server.views import asset_bundles
+from THEODEN_Framework_Server.views import asset_bundles
 
 urlpatterns = [
     path('asset/redirect', asset_bundles.get_asset_bundle),

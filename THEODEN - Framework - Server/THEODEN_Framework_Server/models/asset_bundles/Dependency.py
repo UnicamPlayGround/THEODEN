@@ -1,6 +1,6 @@
 from django.db import models
 
-from Tencu_Framework_Server.models.asset_bundles.AssetBundles import AssetBundles
+from THEODEN_Framework_Server.models.asset_bundles.AssetBundles import AssetBundles
 
 
 class Dependency(models.Model):

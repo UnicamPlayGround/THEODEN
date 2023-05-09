@@ -1,5 +1,5 @@
-from Tencu_Framework_Server.models.Version import Version
-from Tencu_Framework_Server.serializers.Version import VersionSerializer
+from THEODEN_Framework_Server.models.Version import Version
+from THEODEN_Framework_Server.serializers.Version import VersionSerializer
 
 
 def serialize_object_list(lst, serializer):

@@ -1,8 +1,8 @@
-from Tencu_Framework_Server.controllers import utilities
-from Tencu_Framework_Server.models.asset_bundles.AssetBundles import AssetBundles
-from Tencu_Framework_Server.models.asset_bundles.Dependency import Dependency
-from Tencu_Framework_Server.serializers.asset_bundles.AssetBundles import AssetBundlesSerializer
-from Tencu_Framework_Server.serializers.asset_bundles.Dependency import DependencySerializer
+from THEODEN_Framework_Server.controllers import utilities
+from THEODEN_Framework_Server.models.asset_bundles.AssetBundles import AssetBundles
+from THEODEN_Framework_Server.models.asset_bundles.Dependency import Dependency
+from THEODEN_Framework_Server.serializers.asset_bundles.AssetBundles import AssetBundlesSerializer
+from THEODEN_Framework_Server.serializers.asset_bundles.Dependency import DependencySerializer
 
 
 def get_asset_bundle_list(os_name: str):

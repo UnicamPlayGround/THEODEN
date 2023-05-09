@@ -1,5 +1,5 @@
 """
-ASGI config for TEnCu_Framework_Server project.
+ASGI config for THEODEN_Framework_Server project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TEnCu_Framework_Server.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'THEODEN_Framework_Server.settings')
 
 application = get_asgi_application()
