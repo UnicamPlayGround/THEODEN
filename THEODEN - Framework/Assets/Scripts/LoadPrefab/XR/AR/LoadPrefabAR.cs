@@ -10,8 +10,12 @@ namespace LoadPrefab.XR.AR
     public class LoadPrefabAR: LoadPrefab
     {
         public ARTrackedImageManager trackedImageManager;
-        public float tagSize = 0.1F;
 
+        private void Awake()
+        {
+            initialiseModel = false;
+        }
+        
         protected override void OnAfterSetupPrefab(GameObject prefab, ModelConfigs configs = null)
         {
             Debug.Log("Starting");

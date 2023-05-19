@@ -5,7 +5,7 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
-namespace Starter_Package.test.scripts
+namespace Test_Scenes.test.scripts
 {
     public class PlaceObject : MonoBehaviour
     {
