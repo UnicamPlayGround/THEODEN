@@ -1,8 +1,12 @@
 ﻿{
   "models": [
     {
-      "assetBundleName": "prova",
-      "name": "prova"
+      "assetBundleName": "test1",
+      "name": "Snow Tree"
+    },
+    {
+      "assetBundleName": "test2",
+      "name": "Pink Tree"
     }
   ]
 }

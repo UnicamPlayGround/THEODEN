@@ -26,7 +26,7 @@ namespace Startup.Local
             {
                 var assetBundleWebRequest =
                     UnityWebRequestAssetBundle.GetAssetBundle(Path.Combine(Application.streamingAssetsPath,
-                        model.assetBundleName+".unity3d"));
+                        model.assetBundleName));
                 assetBundleWebRequest.SendWebRequest();
                 while (!assetBundleWebRequest.isDone)
                 {
@@ -38,7 +38,7 @@ namespace Startup.Local
                     continue;
                 }
                 Utility.LocalStorageManager.AssetBundleManager.Instance.
-                    SaveAssetBundle(model.name, assetBundle);
+                    SaveAssetBundle(model.assetBundleName, assetBundle);
             }
             /*
             var fileList = Directory.GetFiles(AssetBundlePath);

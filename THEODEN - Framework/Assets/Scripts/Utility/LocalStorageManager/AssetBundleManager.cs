@@ -17,8 +17,8 @@ namespace Utility.LocalStorageManager
 
         public AssetBundle LoadAssetBundle(string assetBundleName, UnityAction onAssetBundleNotPresent = null)
         {
-            if(_assetBundles.ContainsKey(assetBundleName))
-                return _assetBundles[assetBundleName];
+            if(_assetBundles.TryGetValue(assetBundleName, out var bundle))
+                return bundle;
             onAssetBundleNotPresent?.Invoke();
             return null;
         }
