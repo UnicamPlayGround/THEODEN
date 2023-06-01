@@ -2,11 +2,11 @@
   "models": [
     {
       "assetBundleName": "test1",
-      "name": "Snow Tree"
+      "name": "Winter Tree"
     },
     {
       "assetBundleName": "test2",
-      "name": "Pink Tree"
+      "name": "Summer Tree"
     }
   ]
 }
