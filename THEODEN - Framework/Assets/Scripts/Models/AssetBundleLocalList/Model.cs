@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Test_Scenes.models
+namespace Models.AssetBundleLocalList
 {
     [Serializable]
     public class Model

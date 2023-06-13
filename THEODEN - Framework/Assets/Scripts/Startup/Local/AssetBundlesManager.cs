@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using Test_Scenes.models;
+using Models.AssetBundleLocalList;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -10,7 +10,23 @@ namespace Startup.Local
         private const string AssetBundlePath = "AssetBundles/";
         public static void LoadAllAssetBundlesFromStorage()
         {
-            var tmp = Resources.Load<TextAsset>("models");
+            var fileList = Directory.GetFiles(AssetBundlePath);
+            foreach (var filename in fileList)
+            {
+                var assetBundle = AssetBundle.LoadFromFile(filename);
+                if (assetBundle == null)
+                {
+                    Debug.LogError("Failed to load asset bundle: " + filename);
+                    continue;
+                }
+                Utility.LocalStorageManager.AssetBundleManager.Instance.
+                    SaveAssetBundle(assetBundle.name, assetBundle);
+            }
+        }
+
+        public static void LoadAllAssetBundlesFromStreamingAssets(string assetBundlesJsonList)
+        {
+            var tmp = Resources.Load<TextAsset>(assetBundlesJsonList);
             if (tmp == null)
             {
                 Debug.LogError("Failed to load models");
@@ -40,20 +56,6 @@ namespace Startup.Local
                 Utility.LocalStorageManager.AssetBundleManager.Instance.
                     SaveAssetBundle(model.assetBundleName, assetBundle);
             }
-            /*
-            var fileList = Directory.GetFiles(AssetBundlePath);
-            foreach (var filename in fileList)
-            {
-                var assetBundle = AssetBundle.LoadFromFile(filename);
-                if (assetBundle == null)
-                {
-                    Debug.LogError("Failed to load asset bundle: " + filename);
-                    continue;
-                }
-                Utility.LocalStorageManager.AssetBundleManager.Instance.
-                    SaveAssetBundle(assetBundle.name, assetBundle);
-            }
-            */
         }
     }
 }

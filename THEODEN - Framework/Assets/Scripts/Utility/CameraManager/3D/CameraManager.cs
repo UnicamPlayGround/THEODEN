@@ -48,8 +48,8 @@ namespace Utility.CameraManager._3D
             var yAngleRotation = deltaPosition.y * modelConfigs.camera.speedModifier.rotation;
             xAngleRotation = Mathf.Round(xAngleRotation);
             yAngleRotation = Mathf.Round(yAngleRotation);
-            //set camera (angoli x e y invertiti perchè lo schermo è in modalità landscape)
-            //devo ruotare a destra o sinistra di y e su/giù di x
+            //set camera (x and y angles inverted because the screen is in landscape mode)
+            //use y to turn left and right, use x to turn up and down
             transform.Rotate(new Vector3(-yAngleRotation, xAngleRotation, 0), Space.Self);
 
             var currentEulerRotation = transform.rotation.eulerAngles;

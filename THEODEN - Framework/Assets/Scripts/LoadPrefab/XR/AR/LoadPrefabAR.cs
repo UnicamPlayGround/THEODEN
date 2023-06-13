@@ -11,6 +11,7 @@ namespace LoadPrefab.XR.AR
         private void Start()
         {
             initialiseModel = false;
+            initialiseCamera = false;
         }
         
         protected override void OnAfterSetupPrefab(GameObject prefab, ModelConfigs configs = null)
