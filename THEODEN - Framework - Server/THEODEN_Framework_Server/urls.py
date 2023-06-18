@@ -1,0 +1,29 @@
+"""THEODEN_Framework_Server URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/4.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+# from django.contrib import admin
+from django.urls import path
+
+from THEODEN_Framework_Server.views import asset_bundles
+
+urlpatterns = [
+    path('asset/redirect', asset_bundles.get_asset_bundle),
+    path('asset/version', asset_bundles.get_asset_bundle_version),
+    path('asset/list', asset_bundles.get_asset_bundle_list),
+    path('asset/dependency/list', asset_bundles.get_asset_bundle_dependency_list),
+    path('asset/dependency/version', asset_bundles.get_asset_bundle_dependency_version),
+    path('asset', asset_bundles.add_or_edit_asset_bundle),
+    path('asset', asset_bundles.delete_asset_bundle),
+]
