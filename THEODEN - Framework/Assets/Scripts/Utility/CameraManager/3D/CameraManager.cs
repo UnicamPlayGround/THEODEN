@@ -12,7 +12,7 @@ namespace Utility.CameraManager._3D
                 case 1:
                     var touch = Input.GetTouch(0);
                     if (touch.phase != TouchPhase.Moved) return;
-                    Scroll(touch.deltaPosition);
+                    ScrollCamera(touch.deltaPosition);
                     break;
                 case 2:
                     var touchZero = Input.GetTouch(0);
@@ -42,7 +42,7 @@ namespace Utility.CameraManager._3D
             }
         }
 
-        protected sealed override void Scroll(Vector2 deltaPosition)
+        protected sealed override void ScrollCamera(Vector2 deltaPosition)
         {
             var xAngleRotation = deltaPosition.x * modelConfigs.camera.speedModifier.rotation;
             var yAngleRotation = deltaPosition.y * modelConfigs.camera.speedModifier.rotation;
@@ -60,7 +60,7 @@ namespace Utility.CameraManager._3D
             //no need to modify y, rotation over y is just going around model
             //no need to modify z, rotation over z is fixed automatically
             //set camera again with fixed values
-            transform.rotation = Quaternion.Euler(fixedX, currentEulerRotation.y, startingZEulerAngle);
+            transform.rotation = Quaternion.Euler(fixedX, currentEulerRotation.y, startingZEulerAngleCamera);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Utility.CameraManager._2D
                 case 1:
                     var touch = Input.GetTouch(0);
                     if (touch.phase != TouchPhase.Moved) return;
-                    Scroll(touch.deltaPosition);
+                    ScrollCamera(touch.deltaPosition);
                     break;
                 case 2:
                     var touchZero = Input.GetTouch(0);
@@ -28,7 +28,7 @@ namespace Utility.CameraManager._2D
             }
         }
 
-        protected sealed override void Scroll(Vector2 deltaPosition)
+        protected sealed override void ScrollCamera(Vector2 deltaPosition)
         {
             var xTranslation = deltaPosition.x * modelConfigs.camera.speedModifier.rotation;
             var yTranslation = deltaPosition.y * modelConfigs.camera.speedModifier.rotation;

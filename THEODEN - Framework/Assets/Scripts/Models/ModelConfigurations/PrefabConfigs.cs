@@ -15,5 +15,6 @@ namespace Models.ModelConfigurations
         public MinMax scaleY;
         public MinMax scaleZ;
         public SpeedModifier speedModifier;
+        public MinMax xAngle;
     }
 }

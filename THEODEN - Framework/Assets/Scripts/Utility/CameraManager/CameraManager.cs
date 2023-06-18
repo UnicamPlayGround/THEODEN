@@ -13,15 +13,15 @@ namespace Utility.CameraManager
         protected const float ThresholdSwipe = 10F;
         protected const float MaximumDifferenceBetweenFingersDuringSlide = 10F;
         private float _fieldOfView;
-        private float _modelScale;
-        protected float startingZEulerAngle;
+        protected float startingZEulerAngleCamera, startingZEulerAngleModel;
 
         private void Start()
         {
-            cam = Camera.allCameras[0];
+            cam ??= Camera.allCameras[0];
             _fieldOfView = cam.fieldOfView;
-            _modelScale = 1F;
-            startingZEulerAngle = cam.transform.rotation.eulerAngles.z;
+            startingZEulerAngleCamera = cam.transform.rotation.eulerAngles.z;
+            if (model is not null)
+                startingZEulerAngleModel = model.transform.rotation.eulerAngles.z;
         }
 
         private void Update()
@@ -44,26 +44,28 @@ namespace Utility.CameraManager
 
         protected void ZoomModel(float deltaZoom)
         {
-            if (deltaZoom > 0)
-                _modelScale += 0.01F;
-            else if (deltaZoom < 0) _modelScale -= 0.01F;
-            
+            float scale;
+            if (deltaZoom > 0) scale = +0.01F;
+            else if (deltaZoom < 0) scale = -0.01F;
+            else return;
             var scaledModel = model.transform.localScale;
-            scaledModel *= _modelScale;
+            scaledModel += new Vector3(scale, scale, scale);
+            
             scaledModel.x = Mathf.Clamp(scaledModel.x, modelConfigs.prefab.scaleX.min, modelConfigs.prefab.scaleX.max);
             scaledModel.y = Mathf.Clamp(scaledModel.y, modelConfigs.prefab.scaleY.min, modelConfigs.prefab.scaleY.max);
             scaledModel.z = Mathf.Clamp(scaledModel.z, modelConfigs.prefab.scaleZ.min, modelConfigs.prefab.scaleZ.max);
+            
             model.transform.localScale = scaledModel;
         }
         
         protected void TranslateModel(Vector3 deltas)
         {
             model.transform.Translate(deltas * modelConfigs.prefab.speedModifier.translation);
-            var currentPosition = model.transform.position;
+            var currentPosition = model.transform.localPosition;
             currentPosition.x = Mathf.Clamp(currentPosition.x, modelConfigs.prefab.width.min, modelConfigs.prefab.width.max);
             currentPosition.y = Mathf.Clamp(currentPosition.y, modelConfigs.prefab.height.min, modelConfigs.prefab.height.max);
             currentPosition.z = Mathf.Clamp(currentPosition.z, modelConfigs.prefab.depth.min, modelConfigs.prefab.depth.max);
-            model.transform.position = currentPosition;
+            model.transform.localPosition = currentPosition;
         }
 
         protected void TranslateCamera(Vector3 deltas)
@@ -75,7 +77,7 @@ namespace Utility.CameraManager
                 Mathf.Clamp(newCameraYPosition, modelConfigs.camera.height.min, modelConfigs.camera.height.max);
             var newCameraXPosition = currentCameraPosition.x + deltas.y * modelConfigs.camera.speedModifier.translation;
             currentCameraPosition.x = Mathf.Clamp(newCameraXPosition, modelConfigs.camera.width.min, modelConfigs.camera.width.max);
-            currentCameraPosition.z = startingZEulerAngle;
+            currentCameraPosition.z = startingZEulerAngleCamera;
             transform.position = currentCameraPosition;
         }
         
@@ -87,12 +89,34 @@ namespace Utility.CameraManager
                 currentCameraPosition.y - deltaY * modelConfigs.camera.speedModifier.translation;
             currentCameraPosition.y =
                 Mathf.Clamp(newCameraYPosition, modelConfigs.camera.height.min, modelConfigs.camera.height.max);
-            currentCameraPosition.z = startingZEulerAngle;
+            currentCameraPosition.z = startingZEulerAngleCamera;
             transform.position = currentCameraPosition;
         }
+        
+        protected abstract void ScrollCamera(Vector2 deltaPosition);
 
-        protected abstract void Scroll(Vector2 deltaPosition);
+        protected void ScrollModel(Vector2 deltaPosition)
+        {
+            var xAngleRotation = deltaPosition.x * modelConfigs.prefab.speedModifier.rotation;
+            var yAngleRotation = deltaPosition.y * modelConfigs.prefab.speedModifier.rotation;
+            xAngleRotation = Mathf.Round(xAngleRotation);
+            yAngleRotation = Mathf.Round(yAngleRotation);
+            //set camera (x and y angles inverted because the screen is in landscape mode)
+            //use y to turn left and right, use x to turn up and down
+            model.transform.Rotate(new Vector3(-yAngleRotation, xAngleRotation, 0), Space.Self);
 
+            var currentEulerRotation = model.transform.rotation.eulerAngles;
+
+            //clamp new values between bounds
+            var fixedX = ClampInAngles(currentEulerRotation.x, modelConfigs.prefab.xAngle.min, modelConfigs.prefab.xAngle.max);
+
+            //no need to modify y, rotation over y is just turning model left and right
+            //no need to modify z, rotation over z is fixed automatically   
+            //set camera again with fixed values
+            transform.rotation = Quaternion.Euler(fixedX, currentEulerRotation.y, startingZEulerAngleModel);
+            //model.transform.position = Vector3.zero;
+        }
+        
         protected static float ClampInAngles(float value, float min, float max)
         {
             //360°-max is closer to min then max

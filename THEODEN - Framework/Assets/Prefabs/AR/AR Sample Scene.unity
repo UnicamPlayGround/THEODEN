@@ -183,6 +183,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &347715783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 347715784}
+  m_Layer: 0
+  m_Name: Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &347715784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347715783}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1517320744
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedLibrary: {fileID: 11400000, guid: 36ffe8e10d5a5d249879fdb62c8acb0e, type: 2}
   m_MaxNumberOfMovingImages: 0
-  m_TrackedImagePrefab: {fileID: 4077326778150002935, guid: 5bec0005e4204ea4fab07671e4bae73e, type: 3}
+  m_TrackedImagePrefab: {fileID: 0}
 --- !u!1 &1578815852
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,6 +286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1578815853}
   - component: {fileID: 1578815854}
+  - component: {fileID: 1578815855}
   m_Layer: 0
   m_Name: scripts
   m_TagString: Untagged
@@ -293,6 +325,86 @@ MonoBehaviour:
   initialiseModel: 0
   cameraObject: {fileID: 2129839564}
   trackedImageManager: {fileID: 1517320747}
+  cameraManager: {fileID: 1578815855}
+--- !u!114 &1578815855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578815852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fcfee24a12b40ba9c37a3241f4ed22a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modelConfigs:
+    prefab:
+      position:
+        x: 0
+        y: 0
+        z: 0
+      eulerRotation:
+        x: 0
+        y: 0
+        z: 0
+      scale:
+        x: 0
+        y: 0
+        z: 0
+      width:
+        min: 0
+        max: 0
+      height:
+        min: 0
+        max: 0
+      depth:
+        min: 0
+        max: 0
+      scaleX:
+        min: 0
+        max: 0
+      scaleY:
+        min: 0
+        max: 0
+      scaleZ:
+        min: 0
+        max: 0
+      speedModifier:
+        rotation: 0
+        translation: 0
+      xAngle:
+        min: 0
+        max: 0
+    camera:
+      position:
+        x: 0
+        y: 0
+        z: 0
+      eulerRotation:
+        x: 0
+        y: 0
+        z: 0
+      angle:
+        min: 0
+        max: 0
+      height:
+        min: 0
+        max: 0
+      width:
+        min: 0
+        max: 0
+      fieldOfView:
+        min: 0
+        max: 0
+      speedModifier:
+        rotation: 0
+        translation: 0
+  cam: {fileID: 2129839565}
+  trigger: {fileID: 347715783}
+  model: {fileID: 0}
+  modelPrefab: {fileID: 0}
+  arTrackedImageManager: {fileID: 1517320747}
 --- !u!1 &1728616364
 GameObject:
   m_ObjectHideFlags: 0
