@@ -3,4 +3,4 @@ backports.zoneinfo==0.2.1
 Django==4.1.9
 djangorestframework==3.13.1
 pytz==2022.1
-sqlparse==0.4.4
+sqlparse==0.5.0
